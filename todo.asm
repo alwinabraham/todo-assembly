@@ -41,7 +41,7 @@ filename db "todos.txt",0
 
 sockaddr:
     dw 2
-    dw 0x901F
+    dw 0x711A
     dd 0
     dq 0
 
