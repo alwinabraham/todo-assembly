@@ -661,4 +661,11 @@ mov rax,3
 mov rdi,[client]
 syscall
 
+;         ∧＿∧
+;     ;;（´・ω・）
+;   ＿旦_(っ.|🍺|)＿＿ 
+;   |l￣l||￣しﾞしﾞ￣| 
+; Did this much with the support and chatgpt.
+; Will update the ui if i didnt get the job after 2 mnths
+
 jmp accept_loop

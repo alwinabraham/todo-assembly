@@ -1,3 +1,2 @@
-1 apple
 1 orange
 1 carry apple
