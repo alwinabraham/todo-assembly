@@ -32,10 +32,12 @@ link_suffix_len equ 7
 
 done_prefix db " <a href='/done?n="
 done_prefix_len equ 18
-done_suffix db "'>"
+tick_suffix db "'>"
             db 0E2h,09Ch,093h
             db "</a>",10
-done_suffix_len equ 10
+tick_suffix_len equ 10
+; done_suffix equ tick_suffix
+; done_suffix_len equ tick_suffix_len
 
 filename db "todos.txt",0
 
@@ -536,13 +538,16 @@ inc rsi
 mov byte [rdi],'['
 inc rdi
 cmp bl,'1'
-je .mark_x
-mov byte [rdi],' '
+jne .mark_empty
+mov byte [rdi],0E2h
+mov byte [rdi+1],09Ch
+mov byte [rdi+2],093h
+add rdi,3
 jmp .mark_after
-.mark_x:
-mov byte [rdi],'x'
-.mark_after:
+.mark_empty:
+mov byte [rdi],' '
 inc rdi
+.mark_after:
 mov byte [rdi],']'
 inc rdi
 mov byte [rdi],' '
@@ -624,9 +629,9 @@ add dl,'0'
 mov [rdi],al
 mov [rdi+1],dl
 add rdi,2
-; done_suffix
-mov rcx,done_suffix_len
-mov r11,done_suffix
+; tick_suffix
+mov rcx,tick_suffix_len
+mov r11,tick_suffix
 .copy_done_suffix:
 mov al,[r11]
 mov [rdi],al
@@ -667,5 +672,6 @@ syscall
 ;   |l￣l||￣しﾞしﾞ￣| 
 ; Did this much with the support and chatgpt.
 ; Will update the ui if i didnt get the job after 2 mnths
+; Add ascii cat animation
 
 jmp accept_loop
